@@ -46,10 +46,32 @@ class Sokoban:
   muneco_fila = 2
   muneco_columna = 5
 
+  def __init__(self):
+    pass
+  
   def imprimirMapa(self): #imprime el mapa completo 
     for fila in self.mapa:
       print(fila)
-  
-  
+
+  def posicionmuneco(self):
+        for f in range(len(self.map)):  
+            for c in range(len(self.map[f])): 
+                if self.map[f][c] == 0: 
+                    self.muneco_fila = f
+                    self.muneco_columna = c 
+
+
+   def moverDerecha(self):
+        if (
+            self.mapa[self.muneco_fila][self.muneco_columna] == 2
+            and self.map[self.muneco_fila][self.muneco_columna + 1] == 1
+        ): 
+            self.map[self.muneco_fila][self.muneco_columna] = 1  
+            self.map[self.muneco_fila][self.muneco_columna + 1] = 0  
+            self.muneco_columna = self.muneco_columna + 1 
+          
+      
 juego = Sokoban()
 juego.imprimirMapa()
+
+  
