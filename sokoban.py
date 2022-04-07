@@ -71,21 +71,32 @@ class Sokoban:
                     self.personaje_fila = fila
                     self.personaje_columna = col
 
-
+    #personaje espacio
     def moverDerecha(self):
+        print("mover derecha")
         if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila][self.personaje_columna + 1] == 3:
-
+            print("derecha - personaje, espacio")
             self.mapa[self.personaje_fila][self.personaje_columna] = 3  # put floor character last position
             self.mapa[self.personaje_fila][self.personaje_columna + 1] = 2  # move the character to next position
             self.personaje_columna = self.personaje_columna + 1 
     def moverIzquierda(self):
         if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila][self.personaje_columna - 1] == 3:
-
+            print("izquierda - personaje, espacio")
             self.mapa[self.personaje_fila][self.personaje_columna] = 3  # put floor character last position
             self.mapa[self.personaje_fila][self.personaje_columna - 1] = 2  # move the character to next position
             self.personaje_columna = self.personaje_columna - 1 
-
-
+    def moverArriba(self):
+        if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila - 1][self.personaje_columna] == 3:
+            print("arriba - personaje, espacio")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 3  # put floor character last position
+            self.mapa[self.personaje_fila - 1][self.personaje_columna] = 2  # move the character to next position
+            self.personaje_fila = self.personaje_fila - 1
+    def moverAbajo(self):
+        if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila + 1][self.personaje_columna] == 3:
+            print("abajo - personaje, espacio")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 3  # put floor character last position
+            self.mapa[self.personaje_fila + 1][self.personaje_columna] = 2  # move the character to next position
+            self.personaje_fila = self.personaje_fila + 1
     
 
     def jugar(self):
@@ -101,9 +112,9 @@ class Sokoban:
             elif moverse == "d":  # If the move is right
                 self.moverDerecha()  # Call moveRight rules
             elif moverse == "w":  # If the move is up
-                self.moveArriba()  # Call moveUp rules
+                self.moverArriba()  # Call moveUp rules
             elif moverse == "s":  # If the move is down
-                self.moveAbajo()  # Call moveDown rules
+                self.moverAbajo()  # Call moveDown rules
             elif moverse == "q":  # If the move is quit
                 break  # Game quit
 
