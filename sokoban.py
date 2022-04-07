@@ -78,7 +78,12 @@ class Sokoban:
             self.mapa[self.personaje_fila][self.personaje_columna] = 3  # put floor character last position
             self.mapa[self.personaje_fila][self.personaje_columna + 1] = 2  # move the character to next position
             self.personaje_columna = self.personaje_columna + 1 
+    def moverIzquierda(self):
+        if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila][self.personaje_columna - 1] == 3:
 
+            self.mapa[self.personaje_fila][self.personaje_columna] = 3  # put floor character last position
+            self.mapa[self.personaje_fila][self.personaje_columna - 1] = 2  # move the character to next position
+            self.personaje_columna = self.personaje_columna - 1 
 
 
     
@@ -96,9 +101,9 @@ class Sokoban:
             elif moverse == "d":  # If the move is right
                 self.moverDerecha()  # Call moveRight rules
             elif moverse == "w":  # If the move is up
-                self.moveUp()  # Call moveUp rules
+                self.moveArriba()  # Call moveUp rules
             elif moverse == "s":  # If the move is down
-                self.moveDown()  # Call moveDown rules
+                self.moveAbajo()  # Call moveDown rules
             elif moverse == "q":  # If the move is quit
                 break  # Game quit
 
