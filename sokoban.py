@@ -84,7 +84,7 @@ class Sokoban:
             print("derecha - personaje, meta")
             self.mapa[self.personaje_fila][self.personaje_columna] = 3  
             self.mapa[self.personaje_fila][self.personaje_columna +1] = 5  
-            self.personaje_columna = self.personaje_columna + 1
+            self.personaje_columna += 1
         #personaje, caja, espacio [2,0,3 ➔ 3,2,0]
         elif self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila][self.personaje_columna + 1] == 0 and self.mapa[self.personaje_fila][self.personaje_columna + 2] == 3 :
             print("derecha - personaje,caja, espacio")
@@ -100,7 +100,7 @@ class Sokoban:
             print("izquierda - personaje, espacio")
             self.mapa[self.personaje_fila][self.personaje_columna] = 3
             self.mapa[self.personaje_fila][self.personaje_columna - 1] = 2
-            self.personaje_columna = self.personaje_columna - 1
+            self.personaje_columna -= 1
         #personaje,meta [5,3 🠔  4,2]
         elif self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila][self.personaje_columna - 1] == 4:
             print("izquierda - personaje, meta")
@@ -128,7 +128,14 @@ class Sokoban:
             self.mapa[self.personaje_fila][self.personaje_columna] = 3  
             self.mapa[self.personaje_fila - 1][self.personaje_columna] = 5  
             self.personaje_fila = self.personaje_fila - 1
-
+        #personaje, caja, espacio [2,0,3 🠕 3,2,0]
+        elif self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila - 1][self.personaje_columna] == 0 and self.mapa[self.personaje_fila - 2][self.personaje_columna] == 3 :
+            print("arriba - personaje,caja, espacio")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 3  
+            self.mapa[self.personaje_fila - 1][self.personaje_columna] = 2
+            self.mapa[self.personaje_fila - 2][self.personaje_columna] = 0  
+            self.personaje_columna = self.personaje_columna - 1
+    
     def moverAbajo(self):
         #personaje, espacio [2,3 🠗 3,2]
         if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila + 1][self.personaje_columna] == 3:
@@ -142,7 +149,13 @@ class Sokoban:
             self.mapa[self.personaje_fila][self.personaje_columna] = 3 
             self.mapa[self.personaje_fila + 1][self.personaje_columna] = 5  
             self.personaje_fila = self.personaje_fila + 1
-
+        #personaje, caja, espacio [2,0,3 🠗 3,2,0]
+        elif self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila + 1][self.personaje_columna] == 0 and self.mapa[self.personaje_fila + 2][self.personaje_columna] == 3 :
+            print("abajo - personaje,caja, espacio")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 3  
+            self.mapa[self.personaje_fila + 1][self.personaje_columna] = 2
+            self.mapa[self.personaje_fila + 2][self.personaje_columna] = 0  
+            self.personaje_columna = self.personaje_columna + 1
     
     def jugar(self):
         self.imprimirMapa()  # Call the map
