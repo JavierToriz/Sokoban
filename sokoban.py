@@ -129,14 +129,12 @@ class Sokoban:
             self.mapa[self.personaje_fila][self.personaje_columna] = 3
             self.mapa[self.personaje_fila + 1][self.personaje_columna] = 2
             self.personaje_fila = self.personaje_fila + 1
-
-    #personaje,meta
-
-        if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila][self.personaje_columna + 1] == 4:
-            print("derecha - personaje, meta")
-            self.mapa[self.personaje_fila][self.personaje_columna] = 4  
-            self.mapa[self.personaje_fila][self.personaje_columna +1] = 2  
-            self.personaje_columna = self.personaje_columna + 1
+        #personaje,meta [2,4 🠗 3,5]
+        elif self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila + 1][self.personaje_columna] == 4:
+            print("abajo - personaje, meta")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 3 
+            self.mapa[self.personaje_fila + 1][self.personaje_columna] = 5  
+            self.personaje_fila = self.personaje_fila + 1
 
     
     def jugar(self):
