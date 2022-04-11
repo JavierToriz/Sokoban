@@ -227,6 +227,12 @@ class Sokoban:
             self.mapa[self.personaje_fila][self.personaje_columna] = 4
             self.mapa[self.personaje_fila - 1][self.personaje_columna] = 2
             self.personaje_fila = self.personaje_fila - 1
+        #8 personaje_meta, meta (5,4 🠕 4,5)
+        if self.mapa[self.personaje_fila][self.personaje_columna] == 5 and self.mapa[self.personaje_fila - 1][self.personaje_columna] == 4:
+            print("arriba - personaje_meta, espacio")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 4
+            self.mapa[self.personaje_fila - 1][self.personaje_columna] = 5
+            self.personaje_fila = self.personaje_fila - 1
             
     def moverAbajo(self):
         #1personaje, espacio [2,3 🠗 3,2]
@@ -275,7 +281,14 @@ class Sokoban:
             self.mapa[self.personaje_fila][self.personaje_columna] = 4
             self.mapa[self.personaje_fila + 1][self.personaje_columna] = 2
             self.personaje_fila = self.personaje_fila + 1
+        #8 personaje_meta, meta (5,4 🠗 4,5)
+        if self.mapa[self.personaje_fila][self.personaje_columna] == 5 and self.mapa[self.personaje_fila + 1][self.personaje_columna] == 4:
+            print("abajo - personaje_meta, espacio")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 4
+            self.mapa[self.personaje_fila + 1][self.personaje_columna] = 5
+            self.personaje_fila = self.personaje_fila + 1
 
+        
     #definimos el juego       
     def jugar(self):
         self.imprimirMapa()  # Call the map
