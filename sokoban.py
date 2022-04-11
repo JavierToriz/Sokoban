@@ -336,6 +336,13 @@ class Sokoban:
             self.mapa[self.personaje_fila + 1][self.personaje_columna] = 2
             self.mapa[self.personaje_fila + 2][self.personaje_columna] = 0  
             self.personaje_columna = self.personaje_columna + 1
+        #10 personaje_meta, caja, meta (5,0,4 🠗 4,2,6)
+        elif self.mapa[self.personaje_fila][self.personaje_columna] == 5 and self.mapa[self.personaje_fila + 1][self.personaje_columna] == 0 and self.mapa[self.personaje_fila + 2][self.personaje_columna] == 4 :
+            print("abajo - personaje_meta, caja, meta")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 4  
+            self.mapa[self.personaje_fila + 1][self.personaje_columna] = 2
+            self.mapa[self.personaje_fila + 2][self.personaje_columna] = 6  
+            self.personaje_columna = self.personaje_columna + 1
         
     #definimos el juego       
     def jugar(self):
