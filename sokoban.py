@@ -147,6 +147,13 @@ class Sokoban:
             self.mapa[self.personaje_fila][self.personaje_columna +1] = 5
             self.mapa[self.personaje_fila][self.personaje_columna +2] = 0  
             self.personaje_columna = self.personaje_columna + 1
+        #12 personaje_meta, caja_meta, meta (5,6,4 ➔ 4,5,6)
+        elif self.mapa[self.personaje_fila][self.personaje_columna] == 5 and self.mapa[self.personaje_fila][self.personaje_columna + 1] == 6 and self.mapa[self.personaje_fila][self.personaje_columna + 2] == 4 :
+            print("derecha - personaje_meta,caja_meta,meta")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 4  
+            self.mapa[self.personaje_fila][self.personaje_columna +1] = 5
+            self.mapa[self.personaje_fila][self.personaje_columna +2] = 6  
+            self.personaje_columna = self.personaje_columna + 1
         
     def moverIzquierda(self):
         #1personaje, espacio [2,3 🠔 3,2]
