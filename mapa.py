@@ -1,32 +1,5 @@
-print("hola")
-
-
 class Sokoban:
-    """
-
-    Reglas validas para moverse (Arriba, Derecha, Abajo, Izquierda)
-
-    00 - Muneco, camino → [2,3] → [3,2]
-    01 - Muneco, camino
-    02 - Muneco, caja, camino
-    03 - Muneco, caja, meta
-    04 - Muneco, caja_meta, camino
-    05 - Muneco, caja_meta, meta
-
-    06 - Muneco_meta, camino
-    07 - Muneco_meta, camino
-    08 - Muneco_meta, caja, camino
-    09 - Muneco_meta, caja, meta
-    10 - Muneco_meta, caja_meta, camino
-    11 - Muneco_meta, caja_meta, meta
-
-    Derecha → muneco_calumna + 1
-    Izquierda → muneca_columna - 1
-    Abajo → muneco_fila + 1
-    Arriba muneco_fila - 1
-    """
     
-    #Componentes
     caja = 0
     pared = 1
     personaje = 2
@@ -35,7 +8,7 @@ class Sokoban:
     personaje_meta = 5
     caja_meta = 6
 
-    mapa = [
+    [
         [1, 1, 1, 1, 1, 1, 1, 1, 3, 1],
         [1, 3, 3, 3, 3, 3, 3, 3, 3, 1],
         [1, 3, 3, 0, 3, 2, 3, 0, 3, 1],
@@ -46,19 +19,22 @@ class Sokoban:
         [1, 1, 1, 1, 1, 1, 1, 1, 3, 1],
     ]
     #posicón incial del personaje en el mapa
-    personaje_fila = 0
-    personaje_columna = 0
+    
 
     def __init__(self): #inicia la clase
         pass
 
-    def imprimirMapa(self):  #imprime el mapa completo
-        for fila in self.mapa:
-            print(fila)
+    def mapa(self):
+        file = open("mapa_1.txt")
+        print(file.read())
+        
+    personaje_fila = 2
+    personaje_columna = 5    
+
 
     def posicionpersonaje(self): #define la posición del personaje
-        for fila in range(len(self.mapa)):
-            for col in range(len(self.mapa[fila])):
+        for fila in range((self.mapa)):
+            for col in range((self.mapa[fila])):
                 if self.mapa[fila][col] == 2:
                     self.personaje_fila = fila
                     self.personaje_columna = col
@@ -393,7 +369,7 @@ class Sokoban:
         
     #definimos el juego       
     def jugar(self):
-        self.imprimirMapa()  # Call the map
+        self.mapa()
         self.posicionpersonaje()  # Update the character position for new map
         instructiones = "d-derecha, a-izquierda, w-arriba, s-abajo"  # Instructions
         print(instructiones)  # Print the instructions
