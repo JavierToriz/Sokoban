@@ -225,6 +225,7 @@ class Sokoban:
             self.mapa[self.personaje_fila][self.personaje_columna -2] = 6  
             self.personaje_columna = self.personaje_columna - 1
         
+        
     def moverArriba(self):
         #1 personaje, espacio [2,3 🠕 3,2]
         if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila - 1][self.personaje_columna] == 3:
@@ -387,13 +388,42 @@ class Sokoban:
             self.mapa[self.personaje_fila + 1][self.personaje_columna] = 5
             self.mapa[self.personaje_fila + 2][self.personaje_columna] = 6  
             self.personaje_fila = self.personaje_fila + 1
+
+    def dobleSaltoDerecha(self):
+        #POWERUP personaje, espacio [2,3 ➔ 3, 2]
+        if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila][self.personaje_columna + 2] == 3:
+            print("derecha doble salto - personaje, espacio")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 3  
+            self.mapa[self.personaje_fila][self.personaje_columna +2] = 2  
+            self.personaje_columna = self.personaje_columna + 2
+    def dobleSaltoIzquierda(self):
+        #POWERUP personaje, espacio [2,3 🠔 3,2]
+        if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila][self.personaje_columna - 2] == 3:
+            print("doble salto izquierda - personaje, espacio")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 3
+            self.mapa[self.personaje_fila][self.personaje_columna - 2] = 2
+            self.personaje_columna -= 2
+    def dobleSaltoArriba(self):
+        #POWERUP personaje, espacio [2,3 🠕 3,2]
+        if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila - 2][self.personaje_columna] == 3:
+            print("doble salto arriba - personaje, espacio")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 3
+            self.mapa[self.personaje_fila - 2][self.personaje_columna] = 2
+            self.personaje_fila = self.personaje_fila - 2
+    def dobleSaltoAbajo(self):
+        #POWERUP personaje, espacio [2,3 🠗 3,2]
+        if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila + 2][self.personaje_columna] == 3:
+            print(" doble salto abajo - personaje, espacio")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 3
+            self.mapa[self.personaje_fila + 2][self.personaje_columna] = 2
+            self.personaje_fila = self.personaje_fila + 2
         
     #definimos el juego       
     def jugar(self):
         self.imprimirMapa()  # Call the map
         self.posicionpersonaje()  # Update the character position for new map
         instructiones = "d-derecha, a-izquierda, w-arriba, s-abajo"  # Instructions
-        print(instructiones)  # Print the instructions
+        print(instructiones) # Print the instructions
         while True:  # Infinite loop
             self.imprimirMapa()  # Call the printMap method
             moverse = input("Moverse a: ")  # Ask for the move
@@ -405,6 +435,14 @@ class Sokoban:
                 self.moverArriba()  # Call moveUp rules
             elif moverse == "s":  # If the move is down
                 self.moverAbajo()  # Call moveDown rules
+            elif moverse == "l":
+                self.dobleSaltoDerecha()
+            elif moverse == "i":
+                self.dobleSaltoArriba()
+            elif moverse == "k":
+                self.dobleSaltoAbajo()
+            elif moverse == "j":
+                self.dobleSaltoIzquierda()
             elif moverse == "q":  # If the move is quit
                 break  # Game quit
 

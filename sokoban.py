@@ -3,27 +3,20 @@ print("hola")
 
 class Sokoban:
     """
+    Reglas para moverse (Arriba, Derecha, Abajo, Izquierda)
 
-    Reglas validas para moverse (Arriba, Derecha, Abajo, Izquierda)
-
-    00 - Muneco, camino → [2,3] → [3,2]
-    01 - Muneco, camino
-    02 - Muneco, caja, camino
-    03 - Muneco, caja, meta
-    04 - Muneco, caja_meta, camino
-    05 - Muneco, caja_meta, meta
-
-    06 - Muneco_meta, camino
-    07 - Muneco_meta, camino
-    08 - Muneco_meta, caja, camino
-    09 - Muneco_meta, caja, meta
-    10 - Muneco_meta, caja_meta, camino
-    11 - Muneco_meta, caja_meta, meta
-
-    Derecha → muneco_calumna + 1
-    Izquierda → muneca_columna - 1
-    Abajo → muneco_fila + 1
-    Arriba muneco_fila - 1
+    0 - Muneco, camino
+    1 - Muneco, camino
+    2 - Muneco, caja, camino
+    3 - Muneco, caja, meta
+    4 - Muneco, caja_meta, camino
+    5 - Muneco, caja_meta, meta
+    6 - Muneco_meta, camino
+    7 - Muneco_meta, camino
+    8 - Muneco_meta, caja, camino
+    9 - Muneco_meta, caja, meta
+    0 - Muneco_meta, caja_meta, camino
+    1 - Muneco_meta, caja_meta, meta
     """
     
     #Componentes
@@ -53,18 +46,19 @@ class Sokoban:
         pass
 
     def imprimirMapa(self):  #imprime el mapa completo
-        for fila in self.mapa:
+        for fila in self.mapa: #para todas las filas del mapa
             print(fila)
 
     def posicionpersonaje(self): #define la posición del personaje
-        for fila in range(len(self.mapa)):
-            for col in range(len(self.mapa[fila])):
-                if self.mapa[fila][col] == 2:
-                    self.personaje_fila = fila
-                    self.personaje_columna = col
+        for fila in range(len(self.mapa)): #obtiene numero de filas en el mapa
+            for col in range(len(self.mapa[fila])): #obtiene numero de columnas en el mapa
+                if self.mapa[fila][col] == 2: #indica el valor de personaje
+                    self.personaje_fila = fila #actualiza la posición del personaje en la fila
+                    self.personaje_columna = col #actualiza la posición del personaje en columna
 
     #definimos los movimientos
-    def moverDerecha(self):
+                    
+    def moverDerecha(self): #define reglas para movimientos a la derecha
         #1 personaje espacio [2,3 ➔ 3, 2]
         if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila][self.personaje_columna + 1] == 3:
             print("derecha - personaje, espacio")
@@ -146,7 +140,7 @@ class Sokoban:
             self.mapa[self.personaje_fila][self.personaje_columna +2] = 6  
             self.personaje_columna = self.personaje_columna + 1
         
-    def moverIzquierda(self):
+    def moverIzquierda(self):  #define reglas para movimientos a la izquierda
         #1personaje, espacio [2,3 🠔 3,2]
         if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila][self.personaje_columna - 1] == 3:
             print("izquierda - personaje, espacio")
@@ -228,7 +222,7 @@ class Sokoban:
             self.mapa[self.personaje_fila][self.personaje_columna -2] = 6  
             self.personaje_columna = self.personaje_columna - 1
         
-    def moverArriba(self):
+    def moverArriba(self):  #define reglas para movimientos arriba
         #1 personaje, espacio [2,3 🠕 3,2]
         if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila - 1][self.personaje_columna] == 3:
             print("arriba - personaje, espacio")
@@ -309,7 +303,7 @@ class Sokoban:
             self.mapa[self.personaje_fila - 1][self.personaje_columna] = 5
             self.mapa[self.personaje_fila - 2][self.personaje_columna] = 6  
             self.personaje_fila = self.personaje_fila - 1
-    def moverAbajo(self):
+    def moverAbajo(self):  #define reglas para movimientos abajo
         #1personaje, espacio [2,3 🠗 3,2]
         if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila + 1][self.personaje_columna] == 3:
             print("abajo - personaje, espacio")
@@ -392,22 +386,65 @@ class Sokoban:
             self.personaje_fila = self.personaje_fila + 1
         
     #definimos el juego       
+
+    """
+    POWERUP: 
+    Doble salto, solo cuando tenemos [personaje, espacio] en cualquier dirección
+    """
+    def dobleSaltoDerecha(self):
+        #POWERUP personaje, espacio [2,3 ➔ 3, 2]
+        if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila][self.personaje_columna + 2] == 3:
+            print("derecha doble salto - personaje, espacio")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 3  
+            self.mapa[self.personaje_fila][self.personaje_columna +2] = 2  
+            self.personaje_columna = self.personaje_columna + 2
+    def dobleSaltoIzquierda(self):
+        #POWERUP personaje, espacio [2,3 🠔 3,2]
+        if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila][self.personaje_columna - 2] == 3:
+            print("doble salto izquierda - personaje, espacio")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 3
+            self.mapa[self.personaje_fila][self.personaje_columna - 2] = 2
+            self.personaje_columna -= 2
+    def dobleSaltoArriba(self):
+        #POWERUP personaje, espacio [2,3 🠕 3,2]
+        if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila - 2][self.personaje_columna] == 3:
+            print("doble salto arriba - personaje, espacio")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 3
+            self.mapa[self.personaje_fila - 2][self.personaje_columna] = 2
+            self.personaje_fila = self.personaje_fila - 2
+    def dobleSaltoAbajo(self):
+        #POWERUP personaje, espacio [2,3 🠗 3,2]
+        if self.mapa[self.personaje_fila][self.personaje_columna] == 2 and self.mapa[self.personaje_fila + 2][self.personaje_columna] == 3:
+            print(" doble salto abajo - personaje, espacio")
+            self.mapa[self.personaje_fila][self.personaje_columna] = 3
+            self.mapa[self.personaje_fila + 2][self.personaje_columna] = 2
+            self.personaje_fila = self.personaje_fila + 2
+
+    #Definimos el juego
     def jugar(self):
-        self.imprimirMapa()  # Call the map
-        self.posicionpersonaje()  # Update the character position for new map
-        instructiones = "d-derecha, a-izquierda, w-arriba, s-abajo"  # Instructions
-        print(instructiones)  # Print the instructions
-        while True:  # Infinite loop
-            self.imprimirMapa()  # Call the printMap method
-            moverse = input("Moverse a: ")  # Ask for the move
-            if moverse == "a":  # If the move is left
+        self.imprimirMapa()  # Llama al mapa
+        self.posicionpersonaje()  # Localiza la posicón del personaje en el mapa
+        instructiones = "d-derecha, a-izquierda, w-arriba, s-abajo"  # Instructiones
+        print(instructiones) 
+        while True:  # Bucle infinito
+            self.imprimirMapa()  #Llama al metodo imprimirMapa
+            moverse = input("Moverse a: ")  #Pregunta hacia donde moverse
+            if moverse == "a":  # si se desea moverse a la izquiera
                 self.moverIzquierda()  # Call moveLeft rules
-            elif moverse == "d":  # If the move is right
+            elif moverse == "d":  #se se desea moverse a la derecha
                 self.moverDerecha()  # Call moveRight rules
-            elif moverse == "w":  # If the move is up
+            elif moverse == "w":  #Moverse Arriba
                 self.moverArriba()  # Call moveUp rules
-            elif moverse == "s":  # If the move is down
+            elif moverse == "s":  # Moverse abajo
                 self.moverAbajo()  # Call moveDown rules
+            elif moverse == "l":
+                self.dobleSaltoDerecha()
+            elif moverse == "i":
+                self.dobleSaltoArriba()
+            elif moverse == "k":
+                self.dobleSaltoAbajo()
+            elif moverse == "j":
+                self.dobleSaltoIzquierda()
             elif moverse == "q":  # If the move is quit
                 break  # Game quit
 
